@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width">
+<title>Test</title>
+<style type="text/css">
+	.ispan{
+		display: block;
+	}
+	.fix{
+		display: none;
+		position: fixed;
+		background-color: #34495e;
+		color:#fff;
+		font-size:13px;
+	    line-height: 18px;
+	    padding: 6px 6px;
+	    text-align: center;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    border-radius: 6px;
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+</style>
+</head>
+<body>
+	<p id="o">12345</p>
+<!--  <svg width="200" height="200" viewBox="0 0 200 200">
+  <g transform="translate(100,100)" stroke="#000" stroke-width="2">
+    <path id='test' data="{a:'b', c:'d'}" path d="M0 0-70 70A99 99 0 0 1-70-70Z" fill="#f00"/>
+    <path d="M0 0-70-70A99 99 0 0 1 70-70Z" fill="#080"/>
+    <path d="M0 0 70-70A99 99 0 0 1 70 70Z" fill="#dd0"/>
+    <path d="M0 0 70 70A99 99 0 0 1-70 70Z" fill="#04e"/>
+  </g>
+</svg> -->
+	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
+		<path fill="none" stroke="#ccc">
+	</svg>
+	<script data-main='scripts/main' src="scripts/require.js"></script>
+	<script type="text/javascript">
+		//借用父类构造函数来增强子类实例
+		function Super(val){
+			this.val = val;
+			this.arr = [1];
+		}
+		Super.prototype.getVal = function(){
+			return this.val;
+		}
+
+		function Sub(val){
+			Super.call(this, val);
+		}
+		Sub.prototype = new Super();
+
+		var sub1 = new Sub(1);
+		var sub2 = new Sub(2);
+
+		sub1.arr.push(2);
+
+		function p(x){
+			return Math.pow(x, 2);
+		}
+		function cal(x1, y1, x2, y2){
+			return Math.sqrt(p(x1 - x2) + p(y1 - y2));
+		}
+	</script>
+</body>
+</html>

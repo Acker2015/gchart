@@ -1,2 +1,1 @@
-# gchart
-This chart is used for STM period.
+# This is a simple tool for STM assignment.

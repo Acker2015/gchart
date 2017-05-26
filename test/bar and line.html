@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width">
+<title>COMPANY</title>
+<style type="text/css">
+	.ispan{
+		display: block;
+	}
+	.fix{
+		display: none;
+		position: fixed;
+		background-color: #34495e;
+		color:#fff;
+		font-size:13px;
+	    line-height: 18px;
+	    padding: 6px 6px;
+	    text-align: center;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    border-radius: 6px;
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+</style>
+</head>
+<body>
+	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
+	</svg>
+	<script src="../scripts/require.js"></script>
+	<script type="text/javascript">
+		requirejs.config({
+			baseUrl: '../scripts',
+			paths: {
+				jquery: 'lib/jquery'
+			}
+		});
+		require(['jquery',  
+		 'gchart/sprites/annular', 
+		 'gchart/sprites/container',
+		 'gchart/sprites/rect',
+		 'gchart/sprites/text',
+		 'gchart/render',
+		 'gchart/chart'], 
+		 function($, Annular, Container, Rect, Text, Render, Chart){
+		 	console.log('hahh');
+		 	var p = document.getElementById('pie');
+			var width = Number(p.getAttribute('width'));
+			var height = Number(p.getAttribute('height'));
+			var option = {
+			 	container: p,
+			 	area: {x : 0, y: 0, width: width, height: height},
+			 	type: 'cartesian',
+			 	data : [
+			 		{value1: 335, name: 'one', value2: 130, value3: 270},
+					{value1: 679, name: 'two', value2: 372, value3: 290},
+					{value1: 105, name: 'three', value2: 692, value3: 300},
+					{value1: 779, name: 'four', value2: 140, value3: 50}
+			 	],
+			 	legend:{
+			 		hidden: false
+			 	},
+			 	title:{
+			 		text: '测试专用',
+			 		hidden: false
+			 	},
+			 	tooltip: {
+			 		text: function(d){
+			 			return ['name: '+d.name, 'value1: '+d.value1, 'value2: '+ d.value2, 'value3: '+ d.value3];
+			 		},
+			 		trigger: 'item'
+			 	},
+			 	xAxis: {
+			 		type: 'ordinal',
+			 	},
+			 	yAxis: {
+			 		type: 'linear',
+			 		count: 5,
+			 		boundaryGap:[0.1, 0.1],
+			 	},
+			 	series: [
+			 		{
+			 			name: 'ios',
+			 			type: 'bar',
+			 			xField: 'name',
+			 			yField: 'value1',
+			 			stack: 1
+			 		},
+			 		{
+			 			name: 'android',
+			 			type: 'line',
+			 			xField: 'name',
+			 			yField: 'value2',
+			 			stack: 2
+			 		},
+			 		// {
+			 		// 	name: 'old',
+			 		// 	type: 'bar',
+			 		// 	xField: 'name',
+			 		// 	yField: 'value3',
+			 		// 	stack: 2
+			 		// }
+			 	]
+			};
+			Chart.create(option);
+		 });
+	</script>
+</body>
+</html>

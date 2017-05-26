@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width">
+<title>COMPANY</title>
+<style type="text/css">
+	.ispan{
+		display: block;
+	}
+	.fix{
+		display: none;
+		position: fixed;
+		background-color: #34495e;
+		color:#fff;
+		font-size:13px;
+	    line-height: 18px;
+	    padding: 6px 6px;
+	    text-align: center;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	    border-radius: 6px;
+	    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+</style>
+</head>
+<body>
+	<p id="o">12345</p>
+<!--  <svg width="200" height="200" viewBox="0 0 200 200">
+  <g transform="translate(100,100)" stroke="#000" stroke-width="2">
+    <path id='test' data="{a:'b', c:'d'}" path d="M0 0-70 70A99 99 0 0 1-70-70Z" fill="#f00"/>
+    <path d="M0 0-70-70A99 99 0 0 1 70-70Z" fill="#080"/>
+    <path d="M0 0 70-70A99 99 0 0 1 70 70Z" fill="#dd0"/>
+    <path d="M0 0 70 70A99 99 0 0 1-70 70Z" fill="#04e"/>
+  </g>
+</svg> -->
+	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
+	</svg>
+	<script src="../scripts/lib/jquery.js"></script>
+	<script src="../scripts/require.js"></script>
+	<script type="text/javascript">
+		requirejs.config({
+			baseUrl: '../scripts',
+			paths: {
+				jquery: 'lib/jquery'
+			}
+		});
+		require([  
+		 'gchart/sprites/annular', 
+		 'gchart/sprites/container',
+		 'gchart/sprites/rect',
+		 'gchart/sprites/text',
+		 'gchart/render',
+		 'gchart/chart'], 
+		 function(Annular, Container, Rect, Text, Render, Chart){
+		 	console.log('hahh');
+		 	var p = document.getElementById('pie');
+			var width = Number(p.getAttribute('width'));
+			var height = Number(p.getAttribute('height'));
+			 var option = {
+			 	container: p,
+			 	type: 'pie',
+			 	area: {x: 0, y: 0, height: height, width: width},
+			 	data : [
+			 		{value1: 1000, name: 'Intel', value2: 130},
+					{value1: 679, name: 'AMD', value2: 372},
+					// {value1: 105, name: 'three', value2: 692},
+					// {value1: 779, name: 'four', value2: 140},
+			 	],
+			 	radius : [100],
+			 	tooltip: {
+			 		text: function(d){
+			 			return ['name: '+d.name, 'ratio: '+ (d.ratio*100).toFixed(2)+'%'];
+			 		}
+			 	},
+			 	title: {
+			 		text:'Selled CPU ratio from different makers.',
+			 		hidden: false
+			 	},
+			 	legend: {
+			 		orient: 'vertical',
+			 		x: 'left',
+			 	},
+			 	series: [
+			 		{
+			 			name: 'test',
+			 			type: 'pie',
+			 			angleField : 'value1',
+			 			categoryField: 'name',
+			 			angle: [0, 360],
+			 			label: {
+			 				hidden: false,
+			 				position: 'inner',
+			 				text: function(d, i){return (d.ratio * 100).toFixed(2) + '%';}
+			 			}
+			 		}
+			 	]
+			 };
+			Chart.create(option);
+		 });
+	</script>
+</body>
+</html>
