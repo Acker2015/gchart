@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width">
+<title>COMPANY</title>
+<style type="text/css">
+	div {
+		width:100px;
+		height: 100px;
+		background-color: #009688;
+		transition: width 2s;
+		-moz-transition: width 2s; /* Firefox 4 */
+		-webkit-transition: width 2s; /* Safari 和 Chrome */
+		-o-transition: width 2s; /* Opera */
+		}
+	div:hover{
+		width: 300px;
+	}
+	.rrtt{
+		x: 20px;
+		y:100px;
+		width: 200px;
+		height:200px;
+		fill:#009688;
+		transition: width 2s;
+		-moz-transition: width 2s; /* Firefox 4 */
+		-webkit-transition: width 2s; /* Safari 和 Chrome */
+		-o-transition: width 2s; /* Opera */
+	}
+	.rrtt:hover{
+		width:500px;
+	}
+</style>
+</head>
+<body>
+	<div></div>
+	<svg id="pie" width="800" height="600" style="border:1px solid #f2f2f2;">
+		<rect class="rrtt"  rx="20" ry="20" style="stroke:black;
+			stroke-width:5;opacity:0.5"/>
+	</svg>
+	<script src="../scripts/require.js"></script>
+	<script type="text/javascript">
+		requirejs.config({
+			baseUrl: '../scripts',
+			paths: {
+				jquery: 'lib/jquery'
+			}
+		});
+		require(['jquery'], 
+		 function($){
+		 	$(document).ready(function(){
+				var $rect = $('svg rect');
+		 		//$rect.attr('width', 500);
+			});
+
+		 	
+		 });
+	</script>
+</body>
+</html>
