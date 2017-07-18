@@ -27,6 +27,15 @@
 </style>
 </head>
 <body>
+	<p id="o">12345</p>
+<!--  <svg width="200" height="200" viewBox="0 0 200 200">
+  <g transform="translate(100,100)" stroke="#000" stroke-width="2">
+    <path id='test' data="{a:'b', c:'d'}" path d="M0 0-70 70A99 99 0 0 1-70-70Z" fill="#f00"/>
+    <path d="M0 0-70-70A99 99 0 0 1 70-70Z" fill="#080"/>
+    <path d="M0 0 70-70A99 99 0 0 1 70 70Z" fill="#dd0"/>
+    <path d="M0 0 70 70A99 99 0 0 1-70 70Z" fill="#04e"/>
+  </g>
+</svg> -->
 	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
 	</svg>
 	<script src="../scripts/require.js"></script>
@@ -86,22 +95,9 @@
 			 			type: 'bar',
 			 			xField: 'name',
 			 			yField: 'value1',
-			 			stack: 1
-			 		},
-			 		{
-			 			name: 'android',
-			 			type: 'line',
-			 			xField: 'name',
-			 			yField: 'value2',
-			 			stack: 2
-			 		},
-			 		// {
-			 		// 	name: 'old',
-			 		// 	type: 'bar',
-			 		// 	xField: 'name',
-			 		// 	yField: 'value3',
-			 		// 	stack: 2
-			 		// }
+			 			//stack: 1,
+			 			//hidden: true
+			 		}
 			 	],
 			 	animation: 1
 			};
