@@ -26,6 +26,7 @@ define(['gchart/style/style', 'gchart/util'], function(Style, util){
 		// var R = Math.floor(0.9 * maxSpan / 2);
 		annularNodes.each(function(node, i){
 			d  = node.data();
+			if(d.start == 0 && d.end == 360) d.end = 359.99;
 			node.setAttribute({
 				cx: space.width / 2,
 				cy: space.height / 2,

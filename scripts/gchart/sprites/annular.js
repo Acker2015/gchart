@@ -34,6 +34,8 @@ define(['gchart/util', 'gchart/sprites/sprite'], function(util, Sprite){
 		d.push('L' + p[2].join());
 		d.push('A' + [opts.r1, opts.r1, 0, largeArc, 0, p[3]].join());
 		d.push('Z');
+	
+		
 		return d.join(' ');
 	}
 	//create a new object so that we don't mutate the original one.
@@ -43,6 +45,7 @@ define(['gchart/util', 'gchart/sprites/sprite'], function(util, Sprite){
 			cy : o.cy || 0,
 			startRadians : (o.start || 0) * Math.PI / 180,
 			closeRadians : (o.end || 0) * Math.PI / 180,
+			all: Math.abs((o.start || 0) - (o.end || 0))
 		};
 		var t = o.thickness !== undefined ? o.thickness : 100;
 		if(o.innerRadius !== undefined) o2.r1 = o.innerRadius;

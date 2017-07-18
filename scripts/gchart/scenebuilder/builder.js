@@ -27,7 +27,8 @@ define(['gchart/sprites/container',
 		subRoot.addChild(xAxisRoot);
 		subRoot.addChild(yAxisRoot);
 
-		var seriesRoot = new Container();
+		var seriesRoot = new Container(space);
+		seriesRoot.kind('series');
 		series.each(function(se, i){
 			var xData = se.xData, yData = se.yData, data = se.data, xField = se.xField, yField = se.yField;
 			var newData = xData.map(function(d, i){

@@ -1,9 +1,14 @@
 define(['gchart/util'], function(util){
-
+	var make = function(tag, attrs) {
+        var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (var k in attrs){
+            el.setAttribute(k, attrs[k]);
+        }
+        return el;
+    }
     var deal = function(parentEle, node){
     	var tag = node.tag;
     	var type = node.type;
-    	debugger;
     	var element = util.makeSVG(type, tag, node.properties);
     	parentEle.appendChild(element);
     	return element;
@@ -53,5 +58,63 @@ define(['gchart/util'], function(util){
 			}
 		}
 	}
-	return render;
+	function animation(svg, root, which){
+		which = which || 1;
+		var graph = util.select(root, function(node, i){
+			return node.kind() == 'series';
+		});
+		var space = graph.data();
+		var rect = make('rect', {x: space.x + 1, y: space.y, width: space.width, height: space.height, fill: '#fff'});
+		svg.appendChild(rect);
+		var attr = which == 1 ? 'height' : 'width';
+		var measure = which == 1 ? space.height : space.width;
+		if(which == 1){
+			var tt = setInterval((function(len){
+				return function(){
+					measure -= len;
+					len += 0.01;
+					measure = measure <= 0 ? 0 : measure;
+					rect.setAttribute(attr, measure);
+					if(measure <= 0){
+						clearInterval(tt);
+						rect.setAttribute(attr, 0);
+					}
+				}
+				
+			})(2),1);
+		}else if(which == 3){
+			var tt = setInterval((function(opa){
+				return function(){
+					opa -= 0.002;
+					opa = opa <= 0 ? 0 : opa;
+					rect.setAttribute('fill-opacity', opa);
+					if(opa<=0){
+						clearInterval(tt);
+					}
+				}
+				
+			})(1),1);
+		}else{
+			var width = space.width;
+			var x = space.x;
+			var tt = setInterval((function(len){
+				return function(){
+					width -= len;
+					x += len;
+					len += 0.01;
+					width = width <= 0 ? 0 : width;
+					rect.setAttribute('x', x);
+					if(width <= 0){
+						clearInterval(tt);
+						rect.setAttribute('width', 0);
+					}
+				}
+				
+			})(2),1);
+		}
+	}
+	return {
+		render:render,
+		animation: animation
+	}
 });

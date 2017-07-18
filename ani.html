@@ -27,7 +27,6 @@
 </style>
 </head>
 <body>
-	<p id="o">12345</p>
 <!--  <svg width="200" height="200" viewBox="0 0 200 200">
   <g transform="translate(100,100)" stroke="#000" stroke-width="2">
     <path id='test' data="{a:'b', c:'d'}" path d="M0 0-70 70A99 99 0 0 1-70-70Z" fill="#f00"/>
@@ -37,35 +36,32 @@
   </g>
 </svg> -->
 	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
-		
+		<rect x="10" y="50" width="500" height="100" fill="#CC0099"/>
+		<rect x="10" y="170" width="500" height="100" fill="#CC0099"/>
+		<rect x="10" y="290" width="500" height="100" fill="#CC0099"/>
 	</svg>
-	<script data-main='scripts/main' src="scripts/require.js"></script>
+	<script type="text/javascript" src="scripts/lib/jquery.js"></script>
 	<script type="text/javascript">
-		//借用父类构造函数来增强子类实例
-		function Super(val){
-			this.val = val;
-			this.arr = [1];
-		}
-		Super.prototype.getVal = function(){
-			return this.val;
-		}
+		var $rect = $('svg rect');
+		var width = Number($rect.attr('width'));
+		var tt = setInterval((function(flag, opa){
+			return function(){
+				if(width >= 500) flag = true;
+				if(width <= 0) flag = false;
+				if(flag){
+					opa -= 0.002;
+				}else{
+					opa += 0.002;
+				}
+				$rect.attr('width', flag ? width-- : width++);
+				$rect.attr('fill-opacity', opa);
+				if(width<=0){
+					clearInterval(tt);
+				}
+			}
+			
+		})(true, 1),1);
 
-		function Sub(val){
-			Super.call(this, val);
-		}
-		Sub.prototype = new Super();
-
-		var sub1 = new Sub(1);
-		var sub2 = new Sub(2);
-
-		sub1.arr.push(2);
-
-		function p(x){
-			return Math.pow(x, 2);
-		}
-		function cal(x1, y1, x2, y2){
-			return Math.sqrt(p(x1 - x2) + p(y1 - y2));
-		}
 	</script>
 </body>
 </html>

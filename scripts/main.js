@@ -57,18 +57,12 @@ require(['jquery',
 	 		},
 	 		{
 	 			name: 'android',
-	 			type: 'line',
+	 			type: 'bar',
 	 			xField: 'name',
-	 			yField: 'value1',
+	 			yField: 'value2',
 	 		},
-	 		// {
-	 		// 	name: 'old',
-	 		// 	type: 'bar',
-	 		// 	xField: 'name',
-	 		// 	yField: 'value3',
-	 		// 	stack: 2
-	 		// }
-	 	]
+	 	],
+	 	//colors: ["#E2EAE9", "#D4CCC5"]
 	 };
 	Chart.create(option);
 	return;

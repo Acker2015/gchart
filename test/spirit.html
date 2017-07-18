@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width">
-<title>Test</title>
+<title>COMPANY</title>
 <style type="text/css">
 	.ispan{
 		display: block;
@@ -37,35 +37,38 @@
   </g>
 </svg> -->
 	<svg id="pie" width="600" height="500" style="border:1px solid #f2f2f2;">
-		
 	</svg>
-	<script data-main='scripts/main' src="scripts/require.js"></script>
+	<script src="../scripts/lib/jquery.js"></script>
+	<script src="../scripts/require.js"></script>
 	<script type="text/javascript">
-		//借用父类构造函数来增强子类实例
-		function Super(val){
-			this.val = val;
-			this.arr = [1];
-		}
-		Super.prototype.getVal = function(){
-			return this.val;
-		}
-
-		function Sub(val){
-			Super.call(this, val);
-		}
-		Sub.prototype = new Super();
-
-		var sub1 = new Sub(1);
-		var sub2 = new Sub(2);
-
-		sub1.arr.push(2);
-
-		function p(x){
-			return Math.pow(x, 2);
-		}
-		function cal(x1, y1, x2, y2){
-			return Math.sqrt(p(x1 - x2) + p(y1 - y2));
-		}
+		requirejs.config({
+			baseUrl: '../scripts',
+			paths: {
+				jquery: 'lib/jquery'
+			}
+		});
+		require([  
+		 'gchart/sprites/annular', 
+		 'gchart/sprites/container',
+		 'gchart/sprites/rect',
+		 'gchart/sprites/text',
+		 'gchart/render',
+		 'gchart/chart'], 
+		 function(Annular, Container, Rect, Text, Render, Chart){
+		 	var svg = document.getElementById('pie');
+		 	var annu = new Annular();
+		 	annu.setAttribute({
+		 		cx: 300,
+		 		cy: 250,
+		 		start: 0,
+		 		end: 359.99,
+		 		innerRadius: 100,
+		 		outerRadius: 200,
+		 		fill: '#ddd'
+		 	});
+		 	Render.render(svg, annu);
+		 	debugger;
+		 });
 	</script>
 </body>
 </html>

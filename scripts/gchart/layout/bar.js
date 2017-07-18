@@ -60,6 +60,10 @@ define(['gchart/style/style',
  						height: yRange[0] - y_coor,
  						fill: legendScale.exec(name)
  					});
+ 					if(textChildren.length <= 0){
+ 						help[j] += (yRange[0] - y_coor);
+ 						return;
+ 					}
  					var textNode = textChildren[j];
  					textNode.setAttribute('text', y);
  					var bbox = textNode.getBBox();

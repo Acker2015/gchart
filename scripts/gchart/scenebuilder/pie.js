@@ -5,7 +5,7 @@ define(['gchart/sprites/text',
 		'gchart/sprites/container', 
 		'gchart/sprites/annular'], function(Text, Container, Annular){
 	function create(info){
-		var subRoot = new Container();
+		var subRoot = new Container(info.space);
 		subRoot.kind('series');
 		var d = info.data;
 		var angleData = info.angleData;

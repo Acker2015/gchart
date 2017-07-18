@@ -14,7 +14,9 @@ define([], function(){
 		axis : {
 			tick: 3,
 			padding: 10,
-			tick_text: 2
+			tick_text: 2,
+			stroke:'#ccc',
+			fill:'#777'
 		},
 		mark: {
 			innerPadding: 10,

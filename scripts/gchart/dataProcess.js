@@ -134,6 +134,7 @@
  			help.yData = data.map(function(dd){return dd[d.yField]});
  			help.data = data;
  			help.stack = d.stack == null ? generateId() : d.stack;
+ 			help.hidden = d.hidden == null ? false : true;
  			series.push(help);
  		});
  		var which_linear = xAxisInfo.type == 'linear' ? 'x' : 'y';
@@ -176,6 +177,8 @@
  			tooltip.hidden = tooltipInfo.hidden || false;
  			opt.tooltip = tooltip;
  		}
+ 		var animation_type = options.animation || 1;
+ 		opt.animation = animation_type;
  	}
  	function legendInfoProcess(opt){
  		var legendInfo = opt.legend;
@@ -189,6 +192,19 @@
  		}else{
  			legendInfo.data = series.map(function(d){ return d.name;});
  		}
+ 		legendInfo.colors = opt.colors;
+ 	}
+ 	function copyData(da){
+ 		var newData = [];
+ 		for (var i = 0; i < da.length; i++) {
+ 			var d = da[i];
+ 			var sub_obj = {};
+ 			for(var k in d){
+ 				sub_obj[k] = d[k];
+ 			}
+ 			newData.push(sub_obj);
+ 		}
+ 		return newData;
  	}
  	function dataProcess(options){
  		var opt = {};
@@ -197,10 +213,11 @@
  		opt.type = type;
  		opt.area = options.area;
  		opt.container = options.container;
+ 		opt.colors = options.colors || [];
  		/**/
  		util.setSvgRoot(options.container);
  		/**/
- 		var data = options.data;
+ 		var data = copyData(options.data);
  		var seriesInfo = options.series;
  		if(data == null || seriesInfo == null) {
  			util.err('data in option', ' is null.');

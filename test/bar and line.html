@@ -81,13 +81,13 @@
 			 		boundaryGap:[0.1, 0.1],
 			 	},
 			 	series: [
-			 		{
-			 			name: 'ios',
-			 			type: 'bar',
-			 			xField: 'name',
-			 			yField: 'value1',
-			 			stack: 1
-			 		},
+			 		// {
+			 		// 	name: 'ios',
+			 		// 	type: 'bar',
+			 		// 	xField: 'name',
+			 		// 	yField: 'value1',
+			 		// 	stack: 1
+			 		// },
 			 		{
 			 			name: 'android',
 			 			type: 'line',
@@ -102,7 +102,8 @@
 			 		// 	yField: 'value3',
 			 		// 	stack: 2
 			 		// }
-			 	]
+			 	],
+			 	animation: 2
 			};
 			Chart.create(option);
 		 });

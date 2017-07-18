@@ -10,7 +10,7 @@ define([
 	'gchart/layout/layout',
 	'gchart/style/style',
 	'gchart/render',
-	'gchart/event/event'],  function(util, dataProcess, Linear, Ordinal, Ordinal_Color, Container, Text, Builder, Layout, Style, render, Event){
+	'gchart/event/event'],  function(util, dataProcess, Linear, Ordinal, Ordinal_Color, Container, Text, Builder, Layout, Style, Render, Event){
 	var padding = 10;
 	function dealTitle(titleInfo, area){
 		var test = {
@@ -57,7 +57,9 @@ define([
 			return {root: null,remain: area};
 		}
 		var d = legendInfo.data;
-		var legend_scale = (new Ordinal_Color(d)).run();
+		var legend_scale = (new Ordinal_Color(d));
+		if(legendInfo.colors && legendInfo.colors.length > 0) legend_scale.range(legendInfo.colors);
+		legend_scale.run();
 		legendInfo.color_scale = legend_scale;
 		var legendRoot = Builder.legend(legendInfo);
 		legendInfo.root = legendRoot;
@@ -248,7 +250,8 @@ define([
  		tmpRoot.addChild(graphObj.root);
  		// root.appendChild(ee);
  		
- 		render(root, tmpRoot);
+ 		Render.render(root, tmpRoot);
+ 		Render.animation(root, tmpRoot, data.animation);
  		Event(tmpRoot, option);
  	}
  	return {
